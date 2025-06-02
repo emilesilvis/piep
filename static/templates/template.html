@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>{{title}}</title>
+<link rel="stylesheet" href="/static/css/style.css">
+<body>
+<div class="layout">
+    <div class="main-content">
+        <h1><a href="/">{{site_name}}</a></h1>
+        <main>
+        {{content}}
+        </main>
+        <footer>©️ {{year}} {{site_name}}</footer>
+    </div>
+    <aside class="bio-section">
+        <img src="{{bio.image}}" alt="{{bio.name}}" class="bio-image">
+        <p>{{bio.bio}}</p>
+        <div class="social-links">
+            <a href="{{bio.social.x.url}}" class="social-link">
+                <img src="{{bio.social.x.icon}}" alt="X" class="social-icon">
+            </a>
+            <a href="{{bio.social.linkedin.url}}" class="social-link">
+                <img src="{{bio.social.linkedin.icon}}" alt="LinkedIn" class="social-icon">
+            </a>
+        </div>
+    </aside>
+</div>
+</body>
+</html>

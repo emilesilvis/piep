@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from config import SITE_NAME 
+from config import SITE_NAME, BIO
 from pathlib import Path
 from datetime import datetime
 import shutil, re, html
@@ -9,7 +9,7 @@ import markdown  # only external dependency
 ROOT = Path(__file__).parent
 POSTS = ROOT / "posts"
 OUT = ROOT / "out"
-TEMPL = (ROOT / "template.html").read_text(encoding="utf-8")
+TEMPL = (ROOT / "static" / "templates" / "template.html").read_text(encoding="utf-8")
 
 
 def render(markdown_text):
@@ -34,7 +34,14 @@ def apply_template(title, body_html):
     return (TEMPL.replace("{{title}}", html.escape(title))
             .replace("{{content}}", body_html)
             .replace("{{year}}", str(datetime.now().year))
-            .replace("{{site_name}}", SITE_NAME))
+            .replace("{{site_name}}", SITE_NAME)
+            .replace("{{bio.name}}", BIO["name"])
+            .replace("{{bio.bio}}", BIO["bio"])
+            .replace("{{bio.image}}", BIO["image"])
+            .replace("{{bio.social.x.url}}", BIO["social"]["x"]["url"])
+            .replace("{{bio.social.x.icon}}", BIO["social"]["x"]["icon"])
+            .replace("{{bio.social.linkedin.url}}", BIO["social"]["linkedin"]["url"])
+            .replace("{{bio.social.linkedin.icon}}", BIO["social"]["linkedin"]["icon"]))
 
 
 def build_post(md_path):
@@ -50,10 +57,10 @@ def main():
     if OUT.exists(): shutil.rmtree(OUT)
     OUT.mkdir()
 
-    # copy static assets
-    for asset in ("style.css", ):
-        src = ROOT / asset
-        if src.exists(): shutil.copy(src, OUT / asset)
+    # copy static directory
+    static_dir = ROOT / "static"
+    if static_dir.exists():
+        shutil.copytree(static_dir, OUT / "static")
 
     # collect posts
     posts = sorted(POSTS.glob("*.md"), reverse=True)

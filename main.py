@@ -10,6 +10,6 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         super().__init__(*args, directory=str(OUT), **kwargs)
 
 if __name__ == "__main__":
-    with socketserver.TCPServer(("0.0.0.0", 5050), Handler) as httpd:
-        print("Serving files from /out at http://0.0.0.0:5050")
+    with socketserver.TCPServer(("0.0.0.0", 5052), Handler) as httpd:
+        print("Serving files from /out at http://0.0.0.0:5052")
         httpd.serve_forever()
