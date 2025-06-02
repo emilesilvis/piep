@@ -16,3 +16,11 @@ BIO = {
         }
     }
 }
+
+# Navigation configuration
+NAVIGATION = [
+    {
+        "title": "About",
+        "path": "/about"
+    }
+]

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from config import SITE_NAME, BIO
+from config import SITE_NAME, BIO, NAVIGATION
 from pathlib import Path
 from datetime import datetime
 import shutil, re, html
@@ -76,7 +76,10 @@ def main():
         slug = md.stem
         fname = f"{slug}.html"
         (OUT / fname).write_text(full_html, encoding="utf-8")
-        nav_items.append(f"<li><a href='{fname}'>{title}</a></li>")
+        # Only add to navigation if it's in the NAVIGATION config
+        for nav_item in NAVIGATION:
+            if nav_item["path"].lstrip("/") == fname.replace(".html", ""):
+                nav_items.append(f'<li><a href="{fname}">{nav_item["title"]}</a></li>')
 
     # Process posts
     for md in posts:
