@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
+from config import SITE_NAME 
 from pathlib import Path
 from datetime import datetime
 import shutil, re, html
 import markdown  # only external dependency
+
 
 ROOT = Path(__file__).parent
 POSTS = ROOT / "posts"
@@ -29,9 +31,10 @@ def render(markdown_text):
 
 
 def apply_template(title, body_html):
-    return (TEMPL.replace("{{title}}", html.escape(title)).replace(
-        "{{content}}", body_html).replace("{{year}}",
-                                          str(datetime.now().year)))
+    return (TEMPL.replace("{{title}}", html.escape(title))
+            .replace("{{content}}", body_html)
+            .replace("{{year}}", str(datetime.now().year))
+            .replace("{{site_name}}", SITE_NAME))
 
 
 def build_post(md_path):
