@@ -1,0 +1,1 @@
+Minimalist static site generator.
