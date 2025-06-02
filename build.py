@@ -8,6 +8,7 @@ import markdown  # only external dependency
 
 ROOT = Path(__file__).parent
 POSTS = ROOT / "posts"
+PAGES = ROOT / "pages"
 OUT = ROOT / "out"
 TEMPL = (ROOT / "static" / "templates" / "template.html").read_text(encoding="utf-8")
 
@@ -30,7 +31,7 @@ def render(markdown_text):
     )
 
 
-def apply_template(title, body_html):
+def apply_template(title, body_html, nav=""):
     return (TEMPL.replace("{{title}}", html.escape(title))
             .replace("{{content}}", body_html)
             .replace("{{year}}", str(datetime.now().year))
@@ -41,7 +42,8 @@ def apply_template(title, body_html):
             .replace("{{bio.social.x.url}}", BIO["social"]["x"]["url"])
             .replace("{{bio.social.x.icon}}", BIO["social"]["x"]["icon"])
             .replace("{{bio.social.linkedin.url}}", BIO["social"]["linkedin"]["url"])
-            .replace("{{bio.social.linkedin.icon}}", BIO["social"]["linkedin"]["icon"]))
+            .replace("{{bio.social.linkedin.icon}}", BIO["social"]["linkedin"]["icon"])
+            .replace("{{nav}}", nav))
 
 
 def build_post(md_path):
@@ -66,6 +68,17 @@ def main():
     posts = sorted(POSTS.glob("*.md"), reverse=True)
     index_items = []
 
+    # Process pages
+    pages = sorted(PAGES.glob("*.md"))
+    nav_items = []
+    for md in pages:
+        title, full_html = build_post(md)
+        slug = md.stem
+        fname = f"{slug}.html"
+        (OUT / fname).write_text(full_html, encoding="utf-8")
+        nav_items.append(f"<li><a href='{fname}'>{title}</a></li>")
+
+    # Process posts
     for md in posts:
         title, full_html = build_post(md)
         slug = md.stem.split("-", 3)[-1]  # after the date
@@ -75,8 +88,21 @@ def main():
         index_items.append(
             f"<li><a href='{fname}'>{title}</a> <small>{date}</small></li>")
 
-    index_html = apply_template(
-        "Home", "\n<ul>\n" + "\n".join(index_items) + "\n</ul>")
+    # Create index with posts
+    index_content = []
+    
+    # Add posts section
+    index_content.append('<div class="main-content">')
+    index_content.append('<h2 id="posts">Posts</h2>')
+    index_content.append("<ul>")
+    index_content.extend(index_items)
+    index_content.append("</ul>")
+    index_content.append('</div>')
+
+    # Create navigation HTML
+    nav_html = f"<ul>{''.join(nav_items)}</ul>"
+
+    index_html = apply_template("Home", "\n".join(index_content), nav=nav_html)
     (OUT / "index.html").write_text(index_html, encoding="utf-8")
 
 
