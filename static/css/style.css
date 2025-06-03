@@ -28,6 +28,9 @@ body {
 .layout {
   display: grid;
   grid-template-columns: 1fr; /* Default to single column */
+  grid-template-areas: /* Define areas for mobile */
+      "bio"
+      "main";
   gap: 2rem; /* Adjusted gap for mobile */
   max-width: 1200px;
   margin: 0 auto;
@@ -35,6 +38,7 @@ body {
 }
 
 .main-content {
+  grid-area: main; /* Assign to main area */
   max-width: var(--max-width);
 }
 
@@ -93,8 +97,9 @@ footer {
 }
 
 .bio-section {
-    position: sticky;
-    top: 2rem;
+    grid-area: bio; /* Assign to bio area for mobile */
+    /* position: sticky; REMOVE from base */
+    top: 2rem; /* Keep for when sticky is re-added */
     height: fit-content;
     padding: 1.5rem;
     background: #f8f8f8;
@@ -229,7 +234,14 @@ textarea:focus,
 @media (min-width: 768px) {
     .layout {
         grid-template-columns: 1fr 300px;
+        grid-template-areas: /* Define areas for desktop */
+            "main aside";
         gap: 3rem;
         padding: 2rem; /* Restore original padding */
+    }
+
+    .bio-section {
+        grid-area: aside; /* Assign to aside area for desktop */
+        position: sticky; /* Apply sticky only for desktop */
     }
 }
