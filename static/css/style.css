@@ -27,13 +27,18 @@ body {
 
 .layout {
   display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 3rem;
+  grid-template-columns: 1fr; /* Default to single column */
+  grid-template-areas: /* Define areas for mobile */
+      "bio"
+      "main";
+  gap: 2rem; /* Adjusted gap for mobile */
   max-width: 1200px;
   margin: 0 auto;
+  padding: 1rem; /* Add padding for mobile */
 }
 
 .main-content {
+  grid-area: main; /* Assign to main area */
   max-width: var(--max-width);
 }
 
@@ -92,8 +97,9 @@ footer {
 }
 
 .bio-section {
-    position: sticky;
-    top: 2rem;
+    grid-area: bio; /* Assign to bio area for mobile */
+    /* position: sticky; REMOVE from base */
+    top: 2rem; /* Keep for when sticky is re-added */
     height: fit-content;
     padding: 1.5rem;
     background: #f8f8f8;
@@ -146,9 +152,16 @@ footer {
 
 .content-wrapper {
     display: grid;
-    grid-template-columns: 1fr 200px;
-    gap: 2rem;
+    grid-template-columns: 1fr; /* Default to single column */
+    gap: 1.5rem; /* Adjusted gap */
     margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+    .content-wrapper {
+        grid-template-columns: 1fr 200px;
+        gap: 2rem;
+    }
 }
 
 .sidebar {
@@ -186,7 +199,14 @@ footer {
     padding: 0;
     margin: 0;
     display: flex;
-    gap: 1.5rem;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 1rem; /* Adjusted gap for mobile */
+}
+
+@media (min-width: 768px) {
+     .main-nav ul {
+        gap: 1.5rem; /* Restore original gap */
+     }
 }
 
 .main-nav a {
@@ -197,4 +217,31 @@ footer {
 
 .main-nav a:hover {
     text-decoration: underline;
+}
+
+/* Enhanced Focus Styles for Accessibility */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+[tabindex]:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(0, 105, 255, 0.25);
+}
+
+@media (min-width: 768px) {
+    .layout {
+        grid-template-columns: 1fr 300px;
+        grid-template-areas: /* Define areas for desktop */
+            "main aside";
+        gap: 3rem;
+        padding: 2rem; /* Restore original padding */
+    }
+
+    .bio-section {
+        grid-area: aside; /* Assign to aside area for desktop */
+        position: sticky; /* Apply sticky only for desktop */
+    }
 }
