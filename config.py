@@ -2,8 +2,8 @@ SITE_NAME = "Piep"
 
 # Bio configuration
 BIO = {
-    "name": "Your Name",
-    "bio": "Your bio text here",
+    "name": "Piep",
+    "bio": "I'm a little mouse.",
     "image": "/static/images/profile.png",
     "social": {
         "x": {
