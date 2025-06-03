@@ -4,15 +4,15 @@ SITE_NAME = "Piep"
 BIO = {
     "name": "Piep",
     "bio": "I'm a little mouse.",
-    "image": "/static/images/profile.png",
+    "image": "/piep/static/images/profile.png",
     "social": {
         "x": {
             "url": "https://x.com/yourusername",
-            "icon": "/static/icons/x.svg"
+            "icon": "/piep/static/icons/x.svg"
         },
         "linkedin": {
             "url": "https://linkedin.com/in/yourusername",
-            "icon": "/static/icons/linkedin.svg"
+            "icon": "/piep/static/icons/linkedin.svg"
         }
     }
 }
