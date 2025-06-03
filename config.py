@@ -3,7 +3,7 @@ SITE_NAME = "Emile Silvis"
 # Bio configuration
 BIO = {
     "name": "Emile Silvis",
-    "bio": "Grateful for the 173,000 terawatts of solar energy.",
+    "bio": "Hello, I'm Emile 👋 I'm grateful for the 173,000 terawatts of solar energy.",
     "image": "/static/images/profile.png",
     "social": {
         "x": {
@@ -13,14 +13,18 @@ BIO = {
         "linkedin": {
             "url": "https://linkedin.com/in/emilesilvis",
             "icon": "/static/icons/linkedin.svg"
+        },
+        "github": {
+            "url": "https://github.com/emilesilvis",
+            "icon": "/static/icons/github.svg"
         }
     }
 }
 
 # Navigation configuration
 NAVIGATION = [
-    {
-        "title": "About",
-        "path": "/about"
-    }
+    # {
+    #     "title": "About",
+    #     "path": "/about"
+    # }
 ]

@@ -43,6 +43,8 @@ def apply_template(title, body_html, nav=""):
             .replace("{{bio.social.x.icon}}", BIO["social"]["x"]["icon"])
             .replace("{{bio.social.linkedin.url}}", BIO["social"]["linkedin"]["url"])
             .replace("{{bio.social.linkedin.icon}}", BIO["social"]["linkedin"]["icon"])
+            .replace("{{bio.social.github.url}}", BIO["social"]["github"]["url"])
+            .replace("{{bio.social.github.icon}}", BIO["social"]["github"]["icon"])
             .replace("{{nav}}", nav))
 
 

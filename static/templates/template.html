@@ -20,11 +20,14 @@
         <img src="{{bio.image}}" alt="{{bio.name}}" class="bio-image">
         <p>{{bio.bio}}</p>
         <div class="social-links">
-            <a href="{{bio.social.x.url}}" class="social-link">
+            <a href="{{bio.social.x.url}}" class="social-link" target="_blank" rel="noopener noreferrer">
                 <img src="{{bio.social.x.icon}}" alt="X" class="social-icon">
             </a>
-            <a href="{{bio.social.linkedin.url}}" class="social-link">
+            <a href="{{bio.social.linkedin.url}}" class="social-link" target="_blank" rel="noopener noreferrer">
                 <img src="{{bio.social.linkedin.icon}}" alt="LinkedIn" class="social-icon">
+            </a>
+            <a href="{{bio.social.github.url}}" class="social-link" target="_blank" rel="noopener noreferrer">
+                <img src="{{bio.social.github.icon}}" alt="GitHub" class="social-icon">
             </a>
         </div>
     </aside>
