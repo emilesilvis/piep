@@ -31,7 +31,7 @@ def render(markdown_text):
     )
 
 
-def apply_template(title, body_html, nav="", seo_image="", seo_description="", date=""):
+def apply_template(title, body_html, nav="", seo_image="", seo_description="", date="", main_heading=""):
     return (TEMPL.replace("{{title}}", html.escape(title))
             .replace("{{content}}", body_html)
             .replace("{{year}}", str(datetime.now().year))
@@ -48,7 +48,8 @@ def apply_template(title, body_html, nav="", seo_image="", seo_description="", d
             .replace("{{nav}}", nav)
             .replace("{{seo_image}}", seo_image)
             .replace("{{seo_description}}", seo_description)
-            .replace("{{date}}", date))
+            .replace("{{date}}", date)
+            .replace("{{main_heading}}", main_heading))
 
 
 def build_post(md_path):
@@ -75,7 +76,9 @@ def build_post(md_path):
     # Get date from frontmatter or filename
     date = frontmatter.get("date", "-".join(md_path.stem.split("-", 3)[:3]))
     
-    return title, apply_template(title, html_body, seo_image=seo_image, seo_description=seo_description, date=date)
+    main_heading = f'<h1>{html.escape(title)}</h1>\n<time datetime="{date}" class="post-date">{date}</time>'
+    
+    return title, apply_template(title, html_body, seo_image=seo_image, seo_description=seo_description, date=date, main_heading=main_heading)
 
 
 def main():
@@ -129,7 +132,7 @@ def main():
     # Create navigation HTML
     nav_html = f"<ul>{''.join(nav_items)}</ul>"
 
-    index_html = apply_template("Home", "\n".join(index_content), nav=nav_html)
+    index_html = apply_template(SITE_NAME, "\n".join(index_content), nav=nav_html, main_heading="")
     (OUT / "index.html").write_text(index_html, encoding="utf-8")
 
 
