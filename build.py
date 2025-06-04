@@ -31,7 +31,7 @@ def render(markdown_text):
     )
 
 
-def apply_template(title, body_html, nav="", seo_image="", seo_description=""):
+def apply_template(title, body_html, nav="", seo_image="", seo_description="", date=""):
     return (TEMPL.replace("{{title}}", html.escape(title))
             .replace("{{content}}", body_html)
             .replace("{{year}}", str(datetime.now().year))
@@ -47,7 +47,8 @@ def apply_template(title, body_html, nav="", seo_image="", seo_description=""):
             .replace("{{bio.social.github.icon}}", BIO["social"]["github"]["icon"])
             .replace("{{nav}}", nav)
             .replace("{{seo_image}}", seo_image)
-            .replace("{{seo_description}}", seo_description))
+            .replace("{{seo_description}}", seo_description)
+            .replace("{{date}}", date))
 
 
 def build_post(md_path):
@@ -71,7 +72,10 @@ def build_post(md_path):
     seo_image = frontmatter.get("seo_image", "/static/images/profile.png")
     seo_description = frontmatter.get("seo_description", "")
     
-    return title, apply_template(title, html_body, seo_image=seo_image, seo_description=seo_description)
+    # Get date from frontmatter or filename
+    date = frontmatter.get("date", "-".join(md_path.stem.split("-", 3)[:3]))
+    
+    return title, apply_template(title, html_body, seo_image=seo_image, seo_description=seo_description, date=date)
 
 
 def main():
