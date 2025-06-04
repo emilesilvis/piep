@@ -1,9 +1,25 @@
 <!doctype html>
 <html lang="en">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{title}}</title>
-<link rel="stylesheet" href="/static/css/style.css">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <meta name="description" content="{{seo_description}}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{title}}">
+    <meta property="og:description" content="{{seo_description}}">
+    <meta property="og:image" content="{{seo_image}}">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{title}}">
+    <meta name="twitter:description" content="{{seo_description}}">
+    <meta name="twitter:image" content="{{seo_image}}">
+    
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
 <body>
 <div class="layout">
     <div class="main-content">

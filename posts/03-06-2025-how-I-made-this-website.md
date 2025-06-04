@@ -1,3 +1,9 @@
+---
+title: "How I made this website"
+seo_image: "/static/images/profile.png"
+seo_description: "How I made this website with Cursor."
+---
+
 # How I made this website
 
 This site has been made with Cursor, some [jules.google.com](https://jules.google.com/) and love ❤️. Because [why not](https://x.com/emilesilvis/status/1929813972879847583)?

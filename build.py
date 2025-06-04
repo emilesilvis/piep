@@ -31,7 +31,7 @@ def render(markdown_text):
     )
 
 
-def apply_template(title, body_html, nav=""):
+def apply_template(title, body_html, nav="", seo_image="", seo_description=""):
     return (TEMPL.replace("{{title}}", html.escape(title))
             .replace("{{content}}", body_html)
             .replace("{{year}}", str(datetime.now().year))
@@ -45,15 +45,33 @@ def apply_template(title, body_html, nav=""):
             .replace("{{bio.social.linkedin.icon}}", BIO["social"]["linkedin"]["icon"])
             .replace("{{bio.social.github.url}}", BIO["social"]["github"]["url"])
             .replace("{{bio.social.github.icon}}", BIO["social"]["github"]["icon"])
-            .replace("{{nav}}", nav))
+            .replace("{{nav}}", nav)
+            .replace("{{seo_image}}", seo_image)
+            .replace("{{seo_description}}", seo_description))
 
 
 def build_post(md_path):
     raw = md_path.read_text(encoding="utf-8")
+    
+    # Parse frontmatter if it exists
+    frontmatter = {}
+    if raw.startswith("---"):
+        _, frontmatter_text, content = raw.split("---", 2)
+        for line in frontmatter_text.strip().split("\n"):
+            if ":" in line:
+                key, value = line.split(":", 1)
+                frontmatter[key.strip()] = value.strip().strip('"')
+        raw = content.strip()
+    
     h1, _, body = raw.partition("\n")
     title = h1.lstrip("# ").strip() or md_path.stem
     html_body = render(body)
-    return title, apply_template(title, html_body)
+    
+    # Get SEO data from frontmatter or use defaults
+    seo_image = frontmatter.get("seo_image", "/static/images/profile.png")
+    seo_description = frontmatter.get("seo_description", "")
+    
+    return title, apply_template(title, html_body, seo_image=seo_image, seo_description=seo_description)
 
 
 def main():
