@@ -248,3 +248,10 @@ textarea:focus,
         gap: 1.5rem; /* Restore original gap */
     }
 }
+
+/* Add responsive image styles */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
