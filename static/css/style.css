@@ -5,6 +5,11 @@
   --body-font: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --max-width: 60ch;              /* keep line-length comfortable */
   --accent: #0069ff;
+  --dark-bg: #1a1a1a;
+  --dark-text: #e0e0e0;
+  --dark-accent: #0088ff; /* A slightly brighter accent for dark mode */
+  --dark-card-bg: #2a2a2a;
+  --dark-border-color: #444;
 }
 
 /* Reset and base styles */
@@ -261,4 +266,100 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+body.dark-mode a {
+  color: var(--dark-accent);
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4 {
+  color: var(--dark-text);
+}
+
+body.dark-mode .post-date {
+  color: #aaa; /* Lighter gray for dates in dark mode */
+}
+
+body.dark-mode code,
+body.dark-mode pre {
+  background: #2c2c2c;
+  color: #ccc;
+}
+
+body.dark-mode .codehilite .k { color: #569cd6; } /* Keyword */
+body.dark-mode .codehilite .s { color: #ce9178; } /* String */
+body.dark-mode .codehilite .c { color: #6a9955; font-style: italic; } /* Comment */
+body.dark-mode .codehilite .n { color: #9cdcfe; } /* Name */
+body.dark-mode .codehilite .o { color: #d4d4d4; } /* Operator */
+body.dark-mode .codehilite .p { color: #d4d4d4; } /* Punctuation */
+body.dark-mode .codehilite .ch { color: #6a9955; font-style: italic; }
+body.dark-mode .codehilite .cm { color: #6a9955; font-style: italic; }
+body.dark-mode .codehilite .cp { color: #569cd6; }
+body.dark-mode .codehilite .c1 { color: #6a9955; font-style: italic; }
+body.dark-mode .codehilite .cs { color: #6a9955; background-color: #1e1e1e; }
+body.dark-mode .codehilite .kc { color: #569cd6; font-weight: bold; }
+body.dark-mode .codehilite .kd { color: #569cd6; font-weight: bold; }
+
+body.dark-mode .bio-section {
+  background: var(--dark-card-bg);
+  border: 1px solid var(--dark-border-color); /* Optional: add a subtle border */
+}
+
+body.dark-mode footer {
+  color: #888; /* Lighter gray for footer text */
+  border-top: 1px solid var(--dark-border-color);
+}
+
+body.dark-mode a:focus,
+body.dark-mode button:focus,
+body.dark-mode input:focus,
+body.dark-mode select:focus,
+body.dark-mode textarea:focus,
+body.dark-mode [tabindex]:focus {
+    outline: 2px solid var(--dark-accent);
+    box-shadow: 0 0 0 3px rgba(0, 136, 255, 0.3); /* Adjusted shadow for dark accent */
+}
+
+/* Theme Toggle Button */
+#theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%; /* Make it circular */
+  display: inline-flex; /* Aligns icon properly */
+  align-items: center;
+  justify-content: center;
+  color: var(--accent); /* Use accent color for the icon */
+  position: relative; /* If you want to position it absolutely later */
+  /* Example positioning: place it after nav, but before main content starts.
+     Adjust as per where it was added in the HTML.
+     Could be added to a flex container in the header for better alignment.
+  */
+}
+
+#theme-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Subtle hover for light mode */
+}
+
+#theme-toggle svg {
+    width: 20px; /* Control icon size */
+    height: 20px;
+}
+
+body.dark-mode #theme-toggle {
+  color: var(--dark-accent); /* Use dark accent color */
+}
+
+body.dark-mode #theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Subtle hover for dark mode */
 }
